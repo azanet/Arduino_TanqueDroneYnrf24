@@ -1,11 +1,13 @@
 //RECEPTOR NRF24L01
 //ARDUINO MEGA
 
-//configurando RF 2,4Ghz
+//Agregando librerias
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 
+
+//configurando RF 2,4Ghz
 const int pinCE = 9;
 const int pinCSN = 10;
 RF24 radio(pinCE, pinCSN);
@@ -41,12 +43,12 @@ long duration, cm, inches, duracion, espacio, nose;
 
 //MOTORES
 //Motor A
-int enableA = 22;//CONTROL-A
+int enableA = 22;//CONTROL-A 
 int motorA1 = 23;//BOBINA-A1
 int motorA2 = 24;//BOBINA-A2
 
 //Motor B
-int enableB = 25;//CONTROL-B
+int enableB = 25;//CONTROL-B 
 int motorB1 = 26;//BOBINA-B1
 int motorB2 = 27;//BOBINA-B2
 
@@ -56,31 +58,34 @@ long reduration, recm, reinches, reduracion, reespacio, renose;
 int giroreac = 0;
 
 void setup() {
-  //Serial Port begin y RF 2,4Ghz
-  radio.begin();
-  Serial.begin(9600);
-  radio.openReadingPipe(1, pipe);
-  radio.startListening();
-  radio.setPALevel(RF24_PA_HIGH); 
-  radio.setDataRate(RF24_250KBPS);
+    //Serial Port begin y RF 2,4Ghz
+    radio.begin();
+    Serial.begin(9600);
+    radio.openReadingPipe(1, pipe);
+    radio.startListening();
+    radio.setPALevel(RF24_PA_HIGH); 
+    radio.setDataRate(RF24_250KBPS);
 
-  //Definimos LAS QUE SON entradas O salidas
-  //ECHO-IZQUIERDA
-  pinMode(trigPin1, OUTPUT);
-  pinMode(echoPin1, INPUT);
-  //  pinMode(sigled, OUTPUT);
-  //ECHO-DERECHA
-  pinMode(trigPin2, OUTPUT);
-  pinMode(echoPin2, INPUT);
+    //Definimos LAS QUE SON entradas O salidas
+    //ECHO-IZQUIERDA
+    pinMode(trigPin1, OUTPUT);
+    pinMode(echoPin1, INPUT);
+     //  pinMode(sigled, OUTPUT);
+    //ECHO-DERECHA
+    pinMode(trigPin2, OUTPUT);
+    pinMode(echoPin2, INPUT);
   //  pinMode(sigled2, OUTPUT);
+    
   //MOTOR-DERECHA
-  pinMode (enableA, OUTPUT);
-  pinMode (motorA1, OUTPUT);
-  pinMode (motorA2, OUTPUT);
+    pinMode (enableA, OUTPUT); 
+    pinMode (motorA1, OUTPUT);
+    pinMode (motorA2, OUTPUT);
+  
   //MOTOR-IZQUIERDA
-  pinMode (enableB, OUTPUT);
-  pinMode (motorB1, OUTPUT);
-  pinMode (motorB2, OUTPUT);
+    pinMode (enableB, OUTPUT); 
+    pinMode (motorB1, OUTPUT);
+    pinMode (motorB2, OUTPUT);
+
 }
 
 /*
@@ -91,102 +96,98 @@ void setup() {
 //ACTIVAMOS MOTORES A y B
 void motorON () {
 
-  digitalWrite (enableA, HIGH);
-  digitalWrite (enableB, HIGH);
+    digitalWrite (enableA, HIGH);
+    digitalWrite (enableB, HIGH);
 
 }
 
-//ACTIVAMOS MOTOR B
-void motorB () {
-  Serial.println ("Activamos motor B");
-  digitalWrite (enableA, LOW);
-  digitalWrite (enableB, HIGH);
-}
-
-
-
-//ACTIVAMOS MOTOR A
-void motorA () {
-  Serial.println ("Activamos motor B");
-  digitalWrite (enableA, HIGH);
-  digitalWrite (enableB, LOW);
-}
 
 //solo la rueda IZQUIERDA gira hacia ATRAS
 void Aatras () {
-  digitalWrite (motorA1, LOW); //
-  digitalWrite (motorA2, HIGH);
+    digitalWrite (motorB1, LOW); //
+    digitalWrite (motorB2, LOW);
+    digitalWrite (motorA1, LOW); //
+    digitalWrite (motorA2, HIGH);
 }
 
 //solo la rueda IZQUIERDA gira hacia ALANTE
 void Aalante () {
-  digitalWrite (motorA1, HIGH); //
-  digitalWrite (motorA2, LOW);
+    digitalWrite (motorB1, LOW); //
+    digitalWrite (motorB2, LOW);
+    digitalWrite (motorA1, HIGH); //
+    digitalWrite (motorA2, LOW);
 }
 
 //solo la rueda DERECHA gira hacia ATRAS
 void Batras () {
-  digitalWrite (motorB1, LOW); //
-  digitalWrite (motorB2, HIGH);
+    digitalWrite (motorA1, LOW); //
+    digitalWrite (motorA2, LOW);
+    digitalWrite (motorB1, LOW); //
+    digitalWrite (motorB2, HIGH);
 }
 
 //solo la rueda DERECHA gira hacia ALANTE
 void Balante () {
-  digitalWrite (motorB1, HIGH); //
-  digitalWrite (motorB2, LOW);
+    digitalWrite (motorA1, LOW); //
+    digitalWrite (motorA2, LOW);
+    digitalWrite (motorB1, HIGH); //
+    digitalWrite (motorB2, LOW);
 }
 
 //ATRAS
 void atras () {
-  digitalWrite (motorA1, LOW);
-  digitalWrite (motorA2, HIGH);
-  digitalWrite (motorB1, LOW);
-  digitalWrite (motorB2, HIGH);
-  //Durante 3 segundos
+    digitalWrite (motorA1, LOW);
+    digitalWrite (motorA2, HIGH);
+    digitalWrite (motorB1, LOW);
+    digitalWrite (motorB2, HIGH);
+    //Durante 3 segundos
 
 }
 
 //ALANTE
 
 void alante () {
-  digitalWrite (motorA1, HIGH);
-  digitalWrite (motorA2, LOW);
-  digitalWrite (motorB1, HIGH);
-  digitalWrite (motorB2, LOW);
+    digitalWrite (motorA1, HIGH);
+    digitalWrite (motorA2, LOW);
+    digitalWrite (motorB1, HIGH);
+    digitalWrite (motorB2, LOW);
   //Durante 3 segundos
 
 }
 //GIRAR derecha360
 
 void derecha360 () {
-  digitalWrite (motorA1, HIGH);
-  digitalWrite (motorA2, LOW);
-  digitalWrite (motorB1, LOW);
-  digitalWrite (motorB2, HIGH);
+    digitalWrite (motorA1, HIGH);
+    digitalWrite (motorA2, LOW);
+    digitalWrite (motorB1, LOW);
+    digitalWrite (motorB2, HIGH);
   //Durante 3 segundos
 
 }
 // GIRAR izquierda360
 void izquierda360 () {
-  digitalWrite (motorA1, LOW); // gira motor A izquierda
-  digitalWrite (motorA2, HIGH);
-  digitalWrite (motorB1, HIGH); // gira motor B izquierda
-  digitalWrite (motorB2, LOW);
+    digitalWrite (motorA1, LOW); // gira motor A izquierda
+    digitalWrite (motorA2, HIGH);
+    digitalWrite (motorB1, HIGH); // gira motor B izquierda
+    digitalWrite (motorB2, LOW);
   //Durante 3 segundos
-
 }
+
 //PARAR MOTORES
-
 void motorOFF () {
-  digitalWrite (enableA, LOW);
-  digitalWrite (enableB, LOW);
-
-}
+        digitalWrite (enableA, LOW);
+        digitalWrite (enableB, LOW);
+        digitalWrite (motorA1, LOW);
+        digitalWrite (motorA2, LOW);
+        digitalWrite (motorB1, LOW);
+        digitalWrite (motorB2, LOW);
+        
+}//Fin motorOFF
 
 //ULTRASONIDOS
 
 void ultizq (){
-   //SENSOR hc-sr04 IZQUIERDA ultrasonido
+    //SENSOR hc-sr04 IZQUIERDA ultrasonido
     digitalWrite(trigPin1, LOW);
     delayMicroseconds(5);
     digitalWrite(trigPin1, HIGH);
@@ -211,15 +212,16 @@ void ultdcha (){
     // convert the time into a distance
     espacio = (duracion / 2) / 27.1;
     nose = (duracion / 2) / 74;
-  }
+}
 
 
 
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 void loop()
-{
-   //////////////////////////////////////////////
+{   
+
+    /////////////////////////////////////////////
   //////////////////////////////////////////////
   ///PRIMERA PARTE, PERTENECE A RC//////////////
   ////////////////////////////////////////////////////
@@ -233,31 +235,26 @@ void loop()
         radio.read(data, sizeof(data));
         Serial.println(data[0]);
         control = data[0]; 
-    } else {
-        control =0;
-        motorOFF ();
-        delay (50); 
-    }//FIN IF-ELSE (radio.available)
+    }//FIN IF (radio.available)
 
     
-    if (control==0 && lastcontrol==22){
-          lastcontrol=control;
-          }
+    if (control==0 && lastcontrol==2){
+        lastcontrol=control;
+        }
           
-    if (lastcontrol==22){
+    if (lastcontrol==2){
         control=0;
       }
     
       
-  if (estado == 1) {
-   //SE APAGA EL LED VERDE, SE INICIA MODO MANUAL
+    if (estado == 1) {
+    //SE APAGA EL LED VERDE, SE INICIA MODO MANUAL
     //     digitalWrite (ledestado, LOW);
-    
 
       
-         if (control == 22 && lastcontrol==0){
-         
         //apagar el modo manual y activar modo automatico
+        if (control == 2 && lastcontrol==0){
+            
             estado = 0;
             lastcontrol=control;
             motorOFF ();
@@ -268,89 +265,77 @@ void loop()
           ////CONFIGURAR LO QUE RECIBIMOS DEL MANDO RC////////
           ////////////////////////////////////////////////////
 
-        } else if (control == 7) {
+        } else if (control == 5) {
 
           //ENCENDER MOTORES
         //ACTIVAR MOTOR ALANTE VELOCIDAD1
-
+            
             motorON ();
             alante ();
-            delay (50);
+           
 
-        } else if (control == 8) {
+        } else if (control == 3) {
 
-            motorON ();
-            alante ();
-            delay (50);
+           //HAY QUE CREAR LA FUNCION PARA ACTIVAR UNA LUZ
+
 
         } else if (control == 6) {
             motorON ();
             atras ();
-            delay (50);
+          
 
-        } else if (control == 13) {
+        } else if (control == 8) {
             motorON ();
             //girar en 360 hacia izquierda
             izquierda360 ();
-            delay (50);
+  
 
-        } else if (control == 14) {
+        } else if (control == 7) {
             motorON ();
             //girar en 360 hacia derecha
             derecha360 ();
-            delay (50);
-
-        } else if (control == 5) {
-            Serial.println ("Activamos motor A");
-            motorA ();
-            //solo la rueda izquierda gira hacia atras
-            Aatras ();
-            delay (50);
-
-        } else if (control == 4) {
-            Serial.println ("Activamos motor B");
-            motorB ();
-            //solo la rueda derecha gira hacia atras
-            Batras ();
-            delay (50);
+           
 
         } else if (control == 11) {
+            Serial.println ("Activamos motor A");
+            motorON ();
+            //solo la rueda izquierda gira hacia atras
+            Aatras ();
+            
+
+        } else if (control == 12) {
             Serial.println ("Activamos motor B");
-            motorB();
-            //solo la rueda derecha gira hacia delante a velocidad1
-            Balante();
-            delay(50);
+            motorON ();
+            //solo la rueda derecha gira hacia atras
+            Batras ();
+            
 
         } else if (control == 10) {
             Serial.println ("Activamos motor B");
-            motorB();
-           //solo la rueda derecha gira hacia delante a velocidad2
+            motorON();
+            //solo la rueda derecha gira hacia delante a velocidad1
             Balante();
-            delay (50);
+            
 
+        } else if (control == 4) {
+        
+            //HAY QUE CREAR LA FUMCION, PARA LA BOCINAAAA!!!
+            
 
         } else if (control == 9) {
             Serial.println ("Activamos motor A");
-            motorA();
+            motorON();
             //solo la rueda izquierda gira hacia delante a velocidad1
             Aalante();
-            delay (50);
-
-
-        } else if (control == 12) {
-            Serial.println ("Activamos motor A");
-            motorA ();
-            //solo la rueda izquierda gira hacia delante a velocidad2
-            Aalante ();
-            delay (50);
+            
         
         
-         }else{
+        }else{
             ///paramos motores
            
-         //motorOFF ();    
+            motorOFF ();    
      
-         }//Fin ELSE-IF que compara que se está recibiendo
+        }//Fin ELSE-IF que compara que se está recibiendo
 
   //Fin IF (control!=0)
 
@@ -542,7 +527,7 @@ void loop()
       ///////////////////////////////////////////////////////////////////
       //===================================================================================
       ///////////////////////////////////////////////////////////////////////
-      ////2222222222--REREREACCIONES DE LA ALERTA 4, SI VUELVEN A DETECTAR LOS SENSORES DESPUES DE LAS PRIMERAS REREACCIONES
+      ////22222--REREREACCIONES DE LA ALERTA 4, SI VUELVEN A DETECTAR LOS SENSORES DESPUES DE LAS PRIMERAS REREACCIONES
       ///////////////////////////////////////////////////////////////////////////////
       //SENSOR Y LED IZQUIERDA
       ultizq ();
@@ -922,14 +907,14 @@ void loop()
       }//FIN DEL ELSE IF VELOCIDAD 3
     }//FIN DEL ELSE IF QUE CONTIENE LA "REACCION 10"
    
-   if (control==22 && lastcontrol==0){
+   if (control==2 && lastcontrol==0){
      estado = 1;
      lastcontrol=control;
      Serial.print("estado");
      Serial.println(estado);
      motorOFF ();
      delay(1000);
-     }//Fin del if control 22
+     }//Fin del if control 2
     
     }//FIN DEL IF (estado==0)
     

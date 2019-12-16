@@ -67,14 +67,16 @@ void setup() {
     radio.setDataRate(RF24_250KBPS);
 
     //Definimos LAS QUE SON entradas O salidas
+    
     //ECHO-IZQUIERDA
     pinMode(trigPin1, OUTPUT);
     pinMode(echoPin1, INPUT);
      //  pinMode(sigled, OUTPUT);
+    
     //ECHO-DERECHA
     pinMode(trigPin2, OUTPUT);
     pinMode(echoPin2, INPUT);
-  //  pinMode(sigled2, OUTPUT);
+    //pinMode(sigled2, OUTPUT);
     
   //MOTOR-DERECHA
     pinMode (enableA, OUTPUT); 
@@ -93,7 +95,8 @@ void setup() {
   //// configuramos acciones de motor para simplificar el codigo
   ///////////////////////////////////
 */
-//ACTIVAMOS MOTORES A y B
+
+//ACTIVAMOS MOTORES A(motor derecho) y B(motor izquierdo)
 void motorON () {
 
     digitalWrite (enableA, HIGH);
@@ -102,32 +105,32 @@ void motorON () {
 }
 
 
-//solo la rueda IZQUIERDA gira hacia ATRAS
-void Aatras () {
-    digitalWrite (motorB1, LOW); //
+//solo la rueda derecha gira hacia ATRAS
+void IzqAtras () {
+    digitalWrite (motorB1, LOW); 
     digitalWrite (motorB2, LOW);
-    digitalWrite (motorA1, LOW); //
+    digitalWrite (motorA1, LOW); 
     digitalWrite (motorA2, HIGH);
 }
 
-//solo la rueda IZQUIERDA gira hacia ALANTE
-void Aalante () {
+//solo la rueda derecha gira hacia ALANTE
+void IzqAlante () {
     digitalWrite (motorB1, LOW); //
     digitalWrite (motorB2, LOW);
     digitalWrite (motorA1, HIGH); //
     digitalWrite (motorA2, LOW);
 }
 
-//solo la rueda DERECHA gira hacia ATRAS
-void Batras () {
+//solo la rueda izquierda gira hacia ATRAS
+void DchaAtras () {
     digitalWrite (motorA1, LOW); //
     digitalWrite (motorA2, LOW);
     digitalWrite (motorB1, LOW); //
     digitalWrite (motorB2, HIGH);
 }
 
-//solo la rueda DERECHA gira hacia ALANTE
-void Balante () {
+//solo la rueda izquierda gira hacia ALANTE
+void DchaAlante () {
     digitalWrite (motorA1, LOW); //
     digitalWrite (motorA2, LOW);
     digitalWrite (motorB1, HIGH); //
@@ -154,9 +157,9 @@ void alante () {
   //Durante 3 segundos
 
 }
-//GIRAR derecha360
+//GIRAR izquierda360
 
-void derecha360 () {
+void izquierda360 () {
     digitalWrite (motorA1, HIGH);
     digitalWrite (motorA2, LOW);
     digitalWrite (motorB1, LOW);
@@ -164,11 +167,11 @@ void derecha360 () {
   //Durante 3 segundos
 
 }
-// GIRAR izquierda360
-void izquierda360 () {
-    digitalWrite (motorA1, LOW); // gira motor A izquierda
+// GIRAR derecha360
+void derecha360 () {
+    digitalWrite (motorA1, LOW); 
     digitalWrite (motorA2, HIGH);
-    digitalWrite (motorB1, HIGH); // gira motor B izquierda
+    digitalWrite (motorB1, HIGH); 
     digitalWrite (motorB2, LOW);
   //Durante 3 segundos
 }
@@ -248,28 +251,24 @@ void loop()
     
       
     if (estado == 1) {
-    //SE APAGA EL LED VERDE, SE INICIA MODO MANUAL
-    //     digitalWrite (ledestado, LOW);
+        //SE APAGA EL LED VERDE, SE INICIA MODO MANUAL
+        //digitalWrite (ledestado, LOW);
 
       
+        /////////////////////////////////////////////////////
+        ////ACTUANDO SEGUN DATOs RECIBIDOs DEL MANDO RC////////
+        ////////////////////////////////////////////////////
+
         //apagar el modo manual y activar modo automatico
         if (control == 2 && lastcontrol==0){
             
             estado = 0;
             lastcontrol=control;
             motorOFF ();
-            delay(1000);
-     
- 
-          /////////////////////////////////////////////////////
-          ////CONFIGURAR LO QUE RECIBIMOS DEL MANDO RC////////
-          ////////////////////////////////////////////////////
+      
 
         } else if (control == 5) {
-
-          //ENCENDER MOTORES
-        //ACTIVAR MOTOR ALANTE VELOCIDAD1
-            
+            //ALANTE 
             motorON ();
             alante ();
            
@@ -280,41 +279,39 @@ void loop()
 
 
         } else if (control == 6) {
+            //ATRAS
             motorON ();
             atras ();
           
 
         } else if (control == 8) {
             motorON ();
-            //girar en 360 hacia izquierda
-            izquierda360 ();
+            //girar en 360 hacia derecha
+            derecha360 ();
   
 
         } else if (control == 7) {
             motorON ();
-            //girar en 360 hacia derecha
-            derecha360 ();
+            //girar en 360 hacia izquierda
+            izquierda360 ();
            
 
         } else if (control == 11) {
-            Serial.println ("Activamos motor A");
             motorON ();
-            //solo la rueda izquierda gira hacia atras
-            Aatras ();
+            //solo la rueda  derecha gira hacia atras
+            IzqAtras ();
             
 
         } else if (control == 12) {
-            Serial.println ("Activamos motor B");
             motorON ();
-            //solo la rueda derecha gira hacia atras
-            Batras ();
+            //solo la rueda izquierda gira hacia atras
+            DchaAtras ();
             
 
         } else if (control == 10) {
-            Serial.println ("Activamos motor B");
             motorON();
-            //solo la rueda derecha gira hacia delante a velocidad1
-            Balante();
+            //solo la rueda izquierda gira hacia delante a velocidad1
+            DchaAlante();
             
 
         } else if (control == 4) {
@@ -323,31 +320,27 @@ void loop()
             
 
         } else if (control == 9) {
-            Serial.println ("Activamos motor A");
             motorON();
-            //solo la rueda izquierda gira hacia delante a velocidad1
-            Aalante();
+            //solo la rueda derecha gira hacia delante a velocidad1
+            IzqAlante();
             
         
         
         }else{
-            ///paramos motores
-           
+            //paramos motores
             motorOFF ();    
      
         }//Fin ELSE-IF que compara que se está recibiendo
 
-  //Fin IF (control!=0)
-
-   
- //=======final del "si estado es 1"=================================================================================
- }else { //SI "ESTADO" ES 0, COMENZARa EL MODO AUTOMATICO.
+     
+//=======final del "si estado es 1"=================================================================================
+    
+    }else { //SI "ESTADO" ES 0, COMENZARa EL MODO AUTOMATICO.
 
     //SE ENCENDERA EL LED VERDE EN MODO AUTOMATICO
     //    digitalWrite (ledestado, HIGH);
 
 
-    if (estado == 0){
     //////////////////////////////////////////////
     ////////////MODO////AUTOMATICO////////////////
     /////////////////////////////////////////////
@@ -915,11 +908,7 @@ void loop()
      motorOFF ();
      delay(1000);
      }//Fin del if control 2
-    
-    }//FIN DEL IF (estado==0)
-    
-
-     
+         
   
     
   }//fin del ELSE (que pone el modo automatico)

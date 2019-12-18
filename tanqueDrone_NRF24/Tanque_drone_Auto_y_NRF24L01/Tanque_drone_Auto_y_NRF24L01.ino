@@ -53,16 +53,17 @@ int echoPin1 = 29;    ///Echo - BLANCO
 ///VARIABLES PARA DETERMINAR LA DISTANCIA, AGREGAR 3 MAS PARA CADA SENSOR
 long duration, cm, inches, duracion, espacio, nose;
 
-///MOTORES
-///Motor A
+///MOTORES 
+///Motor A (Derecha)
 int enableA = 22;///CONTROL-A (Enciende o apaga el motor)
 int motorA1 = 23;///BOBINA-A1
 int motorA2 = 24;///BOBINA-A2
 
-///Motor B
+///Motor B (Izquierda)
 int enableB = 25;///CONTROL-B (Enciende o apaga el motor)
 int motorB1 = 26;///BOBINA-B1
 int motorB2 = 27;///BOBINA-B2
+
 
 ///variables para REREACCIONES!!!
 int rereac = 0;

@@ -24,7 +24,7 @@ int lastcontrol=0; //variable que tomará el ultimo valor de "control" servirá 
 ///MIENTRAS "ESTADO ES 1" LA MAQUINA ESTARA EN MODO AUTO Y EL LED ESTARA PRENDIDO, SI SE VUELVE 0 (MANUAL), EL LED SE APAGARA
 int estado = 0;//Variable que determinara el modo MANUAL o AUTOMATICO
 int estadoAnt=estado;
-
+unsigned long timer, timerDel;
 //int ledestado = A0;//No estamos usando led todavia
 
 
@@ -260,12 +260,22 @@ void loop(){
         ///Segun que valor tenga estado, se cambiara a uno u otro
         if (estadoAnt==1){
             estado = 0;
+            
+            
+
         }else {
             estado=1;
         }///Fin del If-Else
-        
         lastcontrol=control;///cambiando variable lastcontrol al valor de control
-        MotorOff();                         
+        
+        //Obligaremos a estar iterando en este bucle 2segundos, para poder hacer el cambio de estado bien
+        timer=millis();
+        timerDel=timer;
+        while(timer-timerDel<= 2000 ){
+            MotorOff();
+            timer=millis();
+        }//Fin del While
+
     }///Fin del if
 
 

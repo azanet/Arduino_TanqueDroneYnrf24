@@ -374,71 +374,7 @@ void loop(){
        
         }///FIN DEL SWITCH
 
-/*
 
-        if (control == 5) {
-            ///Alante 
-            MotorOn ();
-            Alante ();
-           
-
-        } else if (control == 3) {
-
-           //HAY QUE CREAR LA FUNCION PARA ACTIVAR UNA LUZ
-
-
-        } else if (control == 6) {
-            ///Atras
-            MotorOn ();
-            Atras ();
-          
-
-        } else if (control == 8) {
-            MotorOn ();
-            ///girar en 360 hacia derecha
-            Derecha360 ();
-  
-
-        } else if (control == 7) {
-            MotorOn ();
-            ///girar en 360 hacia izquierda
-            Izquierda360 ();
-           
-
-        } else if (control == 11) {
-            MotorOn ();
-            ///solo la rueda  derecha gira hacia Atras
-            IzqAtras ();
-            
-
-        } else if (control == 12) {
-            MotorOn ();
-            ///solo la rueda izquierda gira hacia Atras
-            DchaAtras ();
-            
-
-        } else if (control == 10) {
-            MotorOn();
-            ///solo la rueda izquierda gira hacia delante a velocidad1
-            DchaAlante();
-            
-
-        } else if (control == 4) {
-        
-            //HAY QUE CREAR LA FUMCION, PARA LA BOCINAAAA!!!
-            
-
-        } else if (control == 9) {
-            MotorOn();
-            ///solo la rueda derecha gira hacia delante a velocidad1
-            IzqAlante();
-            
-        }else {
-            ///paramos motores
-            MotorOff ();    
-     
-        }///Fin ELSE-IF que compara que se está recibiendo
-  */   
     ///=======FINAL de MODO MANUAL "(si estado es 0)"=================================================================================
 
 //####################################################################################################################

@@ -309,8 +309,8 @@ void loop(){
         
            */
      
-
-                case 5: ///Alante 
+    switch (control){
+        case 5: ///Alante 
             MotorOn ();
             Alante ();
             break;

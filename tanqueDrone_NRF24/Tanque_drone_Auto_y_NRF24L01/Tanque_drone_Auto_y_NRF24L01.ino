@@ -304,7 +304,77 @@ void loop(){
         ////ACTUANDO SEGUN DATOs RECIBIDOs DEL MANDO RC//////
         /////////////////////////////////////////////////////
 
+
+        /*CODIGO  SELECTOR SWITCH "CASE"  DE PRUEBAAAAAAA
+        
+           */
      
+
+                case 5: ///Alante 
+            MotorOn ();
+            Alante ();
+            break;
+
+        case 3:
+
+           //HAY QUE CREAR LA FUNCION PARA ACTIVAR UNA LUZ
+            break;
+
+        case 6:
+            ///Atras
+            MotorOn ();
+            Atras ();
+            break;
+
+        case 8:
+            MotorOn ();
+            ///girar en 360 hacia derecha
+            Derecha360 ();
+            break;
+
+        case 7:
+            MotorOn ();
+            ///girar en 360 hacia izquierda
+            Izquierda360 ();
+            break;
+
+        case 11:
+            MotorOn ();
+            ///solo la rueda  derecha gira hacia Atras
+            IzqAtras ();
+            break;
+
+        case 12:
+            MotorOn ();
+            ///solo la rueda izquierda gira hacia Atras
+            DchaAtras ();
+            break;
+
+        case 10:
+            MotorOn();
+            ///solo la rueda izquierda gira hacia delante a velocidad1
+            DchaAlante();
+            break;
+
+        case 4:
+        
+            //HAY QUE CREAR LA FUMCION, PARA LA BOCINAAAA!!!
+            break;
+
+        case 9:
+            MotorOn();
+            ///solo la rueda derecha gira hacia delante a velocidad1
+            IzqAlante();
+            break;
+
+        default:
+            ///paramos motores
+            MotorOff ();    
+            break;
+       
+        }///FIN DEL SWITCH
+
+/*
 
         if (control == 5) {
             ///Alante 
@@ -368,7 +438,7 @@ void loop(){
             MotorOff ();    
      
         }///Fin ELSE-IF que compara que se está recibiendo
-     
+  */   
     ///=======FINAL de MODO MANUAL "(si estado es 0)"=================================================================================
 
 //####################################################################################################################
